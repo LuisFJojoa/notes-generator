@@ -1,21 +1,21 @@
-import { useMemo } from "react";
-import { getNotesByState } from "../helpers";
+import { useContext, useEffect, useMemo } from "react";
+import { NoteContext } from "../context";
 import { NoteItem } from "./NoteItem";
 
-export const NotesList = ({state='no-archived'}) => {
+export const NotesList = () => {
 
-  //state => boolean to know if a note is archived or not
-  const notes = useMemo( ()=> getNotesByState(state), [state]);
- 
+  const {renderedNotes} = useContext(NoteContext)
+  // console.log(result);
+
   return (
     <div className="row rows-cols-1 row-cols-md-2 g-3">
-      { 
-      notes.map((note)=>(
-        <NoteItem
-        key={note.id}
-        {...note}
-        />
-      ))
+      {
+        renderedNotes?.map((note) => (
+          <NoteItem
+            key={note.id}
+            {...note}
+          />
+        ))
       }
     </div>
   )
