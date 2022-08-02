@@ -1,10 +1,13 @@
 import React from 'react'
+import { AuthProvider } from './auth/context'
+import { AppRouter } from './router/AppRouter'
 
 export const NotesApp = () => {
   return (
     <>
-    <h1>NotesApp</h1>
-    <hr />
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
     </>
   )
 }
