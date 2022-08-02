@@ -12,7 +12,7 @@ export const NotesList = ({state='no-archived'}) => {
       { 
       notes.map((note)=>(
         <NoteItem
-        key={notes.id}
+        key={note.id}
         {...note}
         />
       ))
