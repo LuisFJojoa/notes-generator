@@ -10,7 +10,7 @@ export const NotesRoutes = () => {
         <Routes>
           <Route path="my-notes" element={<NotesPage />} />
           <Route path="archived-notes" element={<ArchivedNotesPage />} />
-          {/* <Route path="/" element={<NotFoundPage />} /> */}
+          <Route path="*" element={<NotFoundPage />} />
           {/* <Route path="search" element={<SearchPage/>} />
           <Route path="hero/:id" element={<HeroPage />} /> */}
 

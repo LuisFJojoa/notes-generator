@@ -7,8 +7,8 @@ import { AuthContext } from '../context'
 export const LoginPage = () => {
 
   const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('testuser@ensolver.com')
+  const [password, setPassword] = useState('testuser_123')
   const [msgError, setMsgError] = useState(null)
   const { login } = useContext(AuthContext)
 
@@ -70,6 +70,7 @@ export const LoginPage = () => {
             className="form-control"
             placeholder="Type your email"
             type="email"
+            autoComplete="off"
           />
           <input
             onChange={(e) => {
@@ -78,6 +79,7 @@ export const LoginPage = () => {
             className="form-control mt-4"
             placeholder="Type your password"
             type="password"
+            autoComplete="off"
           />
         </form>
         <button

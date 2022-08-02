@@ -22,7 +22,7 @@ export const Navbar = () => {
 
       <Link
         className="navbar-brand"
-        to="/"
+        to="/my-notes"
       >
         Home
       </Link>
@@ -31,14 +31,14 @@ export const Navbar = () => {
         <div className="navbar-nav">
 
           <NavLink
-            className={({ isActive }) => `nav-item nav-link ${isActive ? 'active': ''}`}
+            className={({ isActive }) => `text-nowrap nav-item nav-link ${isActive ? 'active': ''}`}
             to="/my-notes"
           >
             My notes
           </NavLink>
 
           <NavLink
-            className={({ isActive }) => `nav-item nav-link ${isActive ? 'active': ''}`}
+            className={({ isActive }) => `text-nowrap nav-item nav-link ${isActive ? 'active': ''}`}
             to="/archived-notes"
           >
             Archived Notes
