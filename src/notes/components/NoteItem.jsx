@@ -13,7 +13,7 @@ import { NoteContext } from "../context/NoteContext";
 // {
 //   id, superhero, publisher, alter_ego, first_appearance, characters
 // }
-export const NoteItem = ({ id, title, content, lastEdited, state }) => {
+export const NoteItem = ({ id, title, content, lastEdited, state, onShow}) => {
 
 
   const { removeNote, editNote, changeNoteState } = useContext(NoteContext)
@@ -34,6 +34,7 @@ export const NoteItem = ({ id, title, content, lastEdited, state }) => {
 
   const onEditNote = () => {
     console.log("Note edited: " + id);
+    onShow()
   }
 
   const iconStyle = { margin: '0 4' }

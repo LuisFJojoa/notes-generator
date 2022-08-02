@@ -8,7 +8,7 @@ export const NotesPage = () => {
   
   useEffect(() => {
     changePage('no-archived')
-  }, [allNotes])
+  }, [])
   
   return (
     <div className="mt-3">
