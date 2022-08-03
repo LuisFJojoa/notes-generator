@@ -1,19 +1,42 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import { useForm } from "../../hooks/useForm";
 import { NoteContext } from "../context/NoteContext";
 import "./ModalForm.css";
+import "./CreateEditModalForm.css"
 
 export const CreateEditModalForm = ({ onClose, show, modalTitle, renderedNote }) => {
 
+  const [inputCategory, setInputCategory] = useState('');
   const { editNote } = useContext(NoteContext)
-  const { title, content, categories } = renderedNote
+  const { title, content } = renderedNote
+  const [categories, setCategories] = useState([])
+
   const { onInputChange } = useForm({
     title: title,
-    content: content,
-    categories: categories
+    content: content
   })
+
+  const onCategoryChange = ({target}) => {
+    setInputCategory(target.value);
+  };
+
+  const onKeyDown = (e) => {
+    const { key, target } = e;
+    const trimmedInput = inputCategory.trim();
+    if (key === 'Enter' || target.name === 'addNote') {
+      e.preventDefault();
+      if (trimmedInput.length && !categories.includes(trimmedInput)) {
+        setCategories(prevState => [...prevState, trimmedInput]);
+      }
+    setInputCategory('');
+    }
+  };
+
+  const deleteCategory = (index) => {
+    setCategories(prevState => prevState.filter((category, i) => i !== index))
+  }
 
   const closeOnEscapeKeyDown = e => {
     if ((e.charCode || e.keyCode) === 27) {
@@ -58,14 +81,16 @@ export const CreateEditModalForm = ({ onClose, show, modalTitle, renderedNote })
               {/* ADD--CATEGORIES */}
               <div className="form-group">
                 <label htmlFor="message-text" className="col-form-label"><b>Categories:</b></label>
-                <input rows="7" className="form-control" id="message-text" readOnly value={categories}></input>
+                <div className="container d-flex flex-wrap">
+                  {categories.map((category) => < div id="category" > {category} <button onClick={() => deleteCategory(index)}>x</button> </ div > )}
+                </div>
               </div>
               <div className="form-group mt-3 d-flex flex-col">
                 <div className="col-10">
-                  <input rows="7" className="form-control" id="message-text" placeholder="new category" value="" onChange={onInputChange}></input>
+                  <input rows="7" className="form-control" id="message-text" placeholder="new category" value={inputCategory} onKeyDown={onKeyDown} onChange={onCategoryChange}/>
                 </div>
                 <div className="col-2 d-flex justify-content-end">
-                  <button type="button" className="btn btn-success" onClick={onClose}>Add</button>
+                  <button type="button" className="btn btn-success" name="addNote" onClick={onKeyDown}>Add</button>
                 </div>
               </div>
             </form>
