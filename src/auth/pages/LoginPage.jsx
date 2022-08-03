@@ -63,27 +63,26 @@ export const LoginPage = () => {
       <div className="col"></div>
       <div className="col">
         <form onSubmit={onLogin} className="form-group">
-          <input
-            onChange={(e) => {
-              setEmail(e.target.value)
-            }}
-            className="form-control"
-            placeholder="Type your email"
-            type="email"
-            autoComplete="off"
-          />
-          <input
-            onChange={(e) => {
-              setPassword(e.target.value)
-            }}
+          <div >
+            <input onChange={(e) => { setEmail(e.target.value) }}
+              className="form-control"
+              placeholder="Type your email"
+              type="email"
+              autoComplete="off"
+            />
+          </div>
+          <div >
+            <input onChange={(e) => { setPassword(e.target.value) }}
             className="form-control mt-4"
             placeholder="Type your password"
             type="password"
             autoComplete="off"
           />
+          </div>
         </form>
+        
         <button
-          className="btn btn-success btn-block"
+          className="btn btn-success btn-block mt-3"
           onClick={onLogin}>
           Login
         </button>

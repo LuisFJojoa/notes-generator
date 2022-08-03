@@ -33,8 +33,7 @@ export const NoteItem = ({ id, title, content, lastEdited, state, onShow}) => {
   }
 
   const onEditNote = () => {
-    console.log("Note edited: " + id);
-    onShow()
+    onShow(id)
   }
 
   const iconStyle = { margin: '0 4' }

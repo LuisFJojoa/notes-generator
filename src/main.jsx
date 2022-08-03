@@ -5,9 +5,9 @@ import './index.css'
 import { NotesApp } from './NotesApp'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
       <NotesApp />
     </BrowserRouter>
-  // </React.StrictMode>
+  </React.StrictMode>
 )
