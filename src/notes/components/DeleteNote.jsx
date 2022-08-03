@@ -1,11 +1,10 @@
 import { useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
-import { useForm } from "../../hooks/useForm";
 import { NoteContext } from "../context/NoteContext";
 import "./ModalForm.css";
 
-export const DeleteModalForm = ({ onClose, show, modalTitle, noteId }) => {
+export const DeleteNote = ({ onClose, show, modalTitle, noteId }) => {
 
   const { removeNote } = useContext(NoteContext)
 
@@ -36,7 +35,7 @@ export const DeleteModalForm = ({ onClose, show, modalTitle, noteId }) => {
       <div className="modal" onClick={onClose} role="dialog">
         <div className="modal-content p-3" onClick={e => e.stopPropagation()}>
           <div className="modal-header d-flex justify-content-center">
-            <h4K className="modal-title">{modalTitle}</h4K>
+            <h1x className="modal-title">{modalTitle}</h1x>
           </div>
           <div className="modal-footer d-flex justify-content-center ">
             <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={onClose}>Cancel</button>

@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { NoteContext } from "../context";
-import { CreateEditModalForm } from "./CreateEditModalForm";
-import { DeleteModalForm } from "./DeleteModalForm";
+import { SaveNote } from "./SaveNote";
+import { DeleteNote } from "./DeleteNote";
 import { NoteItem } from "./NoteItem";
 
 export const NotesList = ({modalState=false, setModal}) => {
@@ -38,19 +38,19 @@ export const NotesList = ({modalState=false, setModal}) => {
       }
       {
         <>
-          <CreateEditModalForm
+          <SaveNote
             modalTitle="Create/Edit Note"
             onClose={onCloseModal}
             show={modalState}
             renderedNote={renderedNote}>
-          </CreateEditModalForm>
+          </SaveNote>
 
-          <DeleteModalForm
+          <DeleteNote
             modalTitle="¿Are you sure to delete this note?"
             onClose={() => setDeleteModalState(false)}
             show={deleteModalState}
             noteId={renderedNote.id}>
-          </DeleteModalForm></>
+          </DeleteNote></>
       }
     </div>
   )
