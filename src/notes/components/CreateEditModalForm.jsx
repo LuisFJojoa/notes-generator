@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import { useForm } from "../../hooks/useForm";
+import { NoteContext } from "../context/NoteContext";
 import "./ModalForm.css";
 
-const initialFormState = {
-  title: '',
-  content: '',
-  categories: []
-}
-export const ModalForm = ({ onClose, show, modalTitle, renderedNote }) => {
-  
-  const {title, content, categories} = renderedNote
-  const {formState, onInputChange} = useForm({
+export const CreateEditModalForm = ({ onClose, show, modalTitle, renderedNote }) => {
+
+  const { editNote } = useContext(NoteContext)
+  const { title, content, categories } = renderedNote
+  const { onInputChange } = useForm({
     title: title,
     content: content,
     categories: categories
@@ -24,16 +21,9 @@ export const ModalForm = ({ onClose, show, modalTitle, renderedNote }) => {
     }
   };
 
-  // const onInputChange = ({ target }) => {
-  //   const { name, value } = target;
-  //   setFormState({
-  //     ...formState,
-  //     [name]: value,
-  //   });
-  // };
-
-  const onSaveData = () => {
-    console.log(formState);
+  const onSaveNote = () => {
+    console.log('Save note');
+    editNote(renderedNote)
   }
 
   useEffect(() => {
@@ -58,12 +48,14 @@ export const ModalForm = ({ onClose, show, modalTitle, renderedNote }) => {
             <form>
               <div className="form-group">
                 <label htmlFor="recipient-name" className="col-form-label"><b>Title:</b></label>
-                <input name="title" type="text" className="form-control" id="recipient-name" value={title || ''} onChange={onInputChange}/>
+                <input name="title" type="text" className="form-control" id="recipient-name" value={title || ''} onChange={onInputChange} />
               </div>
               <div className="form-group">
                 <label htmlFor="message-text" className="col-form-label"><b>Content:</b></label>
                 <textarea name="content" rows="7" className="form-control" id="message-text" value={content} onChange={onInputChange}></textarea>
               </div>
+
+              {/* ADD--CATEGORIES */}
               <div className="form-group">
                 <label htmlFor="message-text" className="col-form-label"><b>Categories:</b></label>
                 <input rows="7" className="form-control" id="message-text" readOnly value={categories}></input>
@@ -80,7 +72,7 @@ export const ModalForm = ({ onClose, show, modalTitle, renderedNote }) => {
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={onClose}>Close</button>
-            <button type="button" className="btn btn-success" onClick={onSaveData}>Save changes</button>
+            <button type="button" className="btn btn-success" onClick={onSaveNote}>Save changes</button>
           </div>
         </div>
       </div>

@@ -1,18 +1,27 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { NoteContext } from "../context";
-import { ModalForm } from "./ModalForm";
+import { CreateEditModalForm } from "./CreateEditModalForm";
+import { DeleteModalForm } from "./DeleteModalForm";
 import { NoteItem } from "./NoteItem";
 
-export const NotesList = ({modalState=false}) => {
+export const NotesList = ({modalState=false, setModal}) => {
+
 
   const { renderedNotes } = useContext(NoteContext)
-  const [show, setShow] = useState(modalState)
+  const [deleteModalState, setDeleteModalState] = useState(false)
   const [renderedNote, setRenderedNote] = useState({})
-
-  const onShow = (note) => {
-    console.log("Note edited: " + note.id);
+  
+  const onDeleteModal = (id) => {
+    setDeleteModalState(true)
+  }
+  const onCreateEditModal = (note) => {
     setRenderedNote(note);
-    setShow(true)
+    setModal(true);
+  }
+
+  const onCloseModal= () => {
+    setModal(false);
+    setRenderedNote({});
   }
   // console.log(result);
   return (
@@ -22,15 +31,27 @@ export const NotesList = ({modalState=false}) => {
           <NoteItem
             key={note.id}
             {...note}
-            onShow={()=> onShow(note)}
-
+            onCreateEditModal={() => onCreateEditModal(note)}
+            onDeleteModal={() => onDeleteModal(note.id)}
           />
         ))
       }
-      
-      <ModalForm modalTitle="Create/Edit Note" onClose={() => setShow(false)} show={show} renderedNote={renderedNote}>
-        <p>This is modal body</p>
-      </ModalForm>
+      {
+        <>
+          <CreateEditModalForm
+            modalTitle="Create/Edit Note"
+            onClose={onCloseModal}
+            show={modalState}
+            renderedNote={renderedNote}>
+          </CreateEditModalForm>
+
+          <DeleteModalForm
+            modalTitle="¿Are you sure to delete this note?"
+            onClose={() => setDeleteModalState(false)}
+            show={deleteModalState}
+            noteId={renderedNote.id}>
+          </DeleteModalForm></>
+      }
     </div>
   )
 }

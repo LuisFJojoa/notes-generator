@@ -13,7 +13,6 @@ export const NotesPage = () => {
   }, [])
 
   const onAddNote = () => {
-    console.log('...');
     setModalState(true)
   }
 
@@ -27,13 +26,13 @@ export const NotesPage = () => {
         <div className="col-6 d-flex align-items-center justify-content-end">
           <button type="button" onClick={() => onAddNote()} className="btn btn-outline-dark btn-lg d-flex flex-row pt-2">
             Add Note
-            <BsPlus size={30}/>
+            <BsPlus size={30} />
           </button>
         </div>
       </div>
 
       <hr />
-      <NotesList modalState={modalState} />
+      <NotesList modalState={modalState} setModal={setModalState} />
     </div>
   )
 }

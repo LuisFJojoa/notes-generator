@@ -9,8 +9,6 @@ export const NoteReducer = (state = [], action) => {
       return [...state, action.payload]
 
     case types.removeNote:
-      console.log(state);
-      console.log(action);
       return {
         ...state,
         allNotes: state.allNotes.filter(note => note.id != action.payload)

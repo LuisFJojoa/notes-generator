@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { ModalForm } from "../components/ModalForm"
 
 export const NotFoundPage = () => {
 
