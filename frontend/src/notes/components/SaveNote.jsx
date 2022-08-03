@@ -9,8 +9,8 @@ import "./SaveNote.css"
 export const SaveNote = ({ onClose, show, renderedNote }) => {
 
   const [initialDataToFrom, setInitialDataToForm] = useState({
-    title: 'Add new note',
-    event: 'Add note'
+    title: 'Edit note',
+    event: 'Save changes'
   })
 
   const [inputCategory, setInputCategory] = useState('');
