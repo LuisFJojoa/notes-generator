@@ -32,7 +32,7 @@ export const NotesPage = () => {
       </div>
 
       <hr />
-      <NotesList modalState={modalState} setModal={setModalState} />
+      {/* <NotesList modalState={modalState} setModal={setModalState} /> */}
     </div>
   )
 }
