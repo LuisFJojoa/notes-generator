@@ -15,6 +15,9 @@ app.use(express.urlencoded({ extended: true }));
 
 const db = require("./models");
 
+const NoteController = require("./controllers/note.controller");
+const CategoryController = require("./controllers/category.controller");
+
 db.sequelize.sync()
   .then(() => {
     console.log("sync db.");
