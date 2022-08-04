@@ -1,6 +1,7 @@
 const dbConfig = require("../config/db.config.js");
 const Sequelize = require("sequelize");
 let sequelize;
+const JAWSDB_URL = 'mysql://ro6kiti9c0vut32u:aq4f1gayw7dkk7g7@y6aj3qju8efqj0w1.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/k8731r6ohjql1vb1';
 
 if (JAWSDB_URL) {
   sequelize = new Sequelize(JAWSDB_URL);
