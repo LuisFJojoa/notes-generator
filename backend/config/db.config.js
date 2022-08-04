@@ -1,7 +1,7 @@
 module.exports = {
   //First six parameters are for MySQL connection
   HOST: "localhost",
-  USER: "root",
+  USER: "root", //ensolvers_db
   PASSWORD: "",
   DB: "ensolvers_notes",
   dialect: "mysql",
