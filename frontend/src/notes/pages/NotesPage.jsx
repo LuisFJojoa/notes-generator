@@ -20,18 +20,17 @@ export const NotesPage = () => {
         </div>
 
         <div className="col-6 d-flex align-items-center justify-content-end">
-          <button type="button" onClick={() => onAddNote()} className="btn btn-outline-dark btn-lg d-flex flex-row pt-2">
+          <button type="button" onClick={() => onAddNote()} className="btn btn-outline-dark btn-lg d-flex flex-row">
             Add Note
             <BsPlus size={30} />
           </button>
         </div>
       </div>
-
       <hr />
       {
         isLoading
           ? <LoadingScreen title="Loading notes" />
-          : <NotesList title="No notes yet, CREATE your first note here..." modalState={modalState} setModal={setModalState} renderedNotes={renderedNotes} createNote={createNote} updateNote={updateNote} deleteNote={deleteNote}/>
+          : <NotesList title={`No notes yet, ADD your first note here...`} modalState={modalState} setModal={setModalState} renderedNotes={renderedNotes} createNote={createNote} updateNote={updateNote} deleteNote={deleteNote}/>
              
       }
 

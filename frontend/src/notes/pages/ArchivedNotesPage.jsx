@@ -7,7 +7,11 @@ export const ArchivedNotesPage = () => {
   
   return (
     <div className="mt-3">
-      <h1>Archived notes</h1>
+      <div className="container d-flex p-0">
+        <div className="col-6">
+          <h1>Archived notes</h1>
+        </div>
+      </div>
       <hr />
       {
         isLoading
