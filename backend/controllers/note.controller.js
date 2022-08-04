@@ -1,5 +1,5 @@
 const db = require("../models");
-const Note = db.notes;
+const Note = db.note;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Note
@@ -17,7 +17,7 @@ exports.create = (req, res) => {
     title: req.body.title,
     content: req.body.content,
     state: req.body.state ? req.body.state : 'no-archived',
-    categories: JSON.stringify(req.body.categories)
+    categories: req.body.categories
 
   };
   // Save Note in the database

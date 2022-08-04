@@ -93,7 +93,9 @@ export const SaveNote = ({ onClose, show, renderedNote, onCreateNote, onUpdateNo
       }
 
       console.log('Edit note');
-      onUpdateNote(note, false)
+
+      console.log(note);
+      //onUpdateNote(note, false)
 
     } else {
       const note = {
