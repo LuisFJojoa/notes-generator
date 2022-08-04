@@ -1,17 +1,15 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { NoteContext } from "../context";
+import { useState } from "react";
 import { SaveNote } from "./SaveNote";
 import { DeleteNote } from "./DeleteNote";
 import { NoteItem } from "./NoteItem";
 
-export const NotesList = ({modalState=false, setModal}) => {
+export const NotesList = ({modalState=false, setModal, renderedNotes, createNote, updateNote, deleteNote}) => {
 
-
-  const { renderedNotes } = useContext(NoteContext)
   const [deleteModalState, setDeleteModalState] = useState(false)
   const [renderedNote, setRenderedNote] = useState({})
   
-  const onDeleteModal = (id) => {
+  const onDeleteModal = (note) => {
+    setRenderedNote(note)
     setDeleteModalState(true)
   }
   const onCreateEditModal = (note) => {
@@ -23,16 +21,32 @@ export const NotesList = ({modalState=false, setModal}) => {
     setModal(false);
     setRenderedNote({});
   }
+
+  const onCreateNote= (note) => {
+    createNote(note)
+    setModal(false)
+  }
+
+  const onUpdateNote= (note, flag) => {
+    updateNote(note, flag)
+    setModal(false)
+  }
+
+  const onDeleteNote = (note) => {
+    deleteNote(note)
+    setModal(false)
+  }
   // console.log(result);
   return (
-    <div className="row rows-cols-1 row-cols-md-2 g-3">
+    <div className="row rows-cols-sm-1 row-cols-md-2 g-3">
       {
         renderedNotes?.map((note) => (
           <NoteItem
             key={note.id}
             {...note}
             onCreateEditModal={() => onCreateEditModal(note)}
-            onDeleteModal={() => onDeleteModal(note.id)}
+            onDeleteModal={() => onDeleteModal(note)}
+            onUpdateNote={updateNote}
           />
         ))
       }
@@ -42,14 +56,17 @@ export const NotesList = ({modalState=false, setModal}) => {
             modalTitle="Create/Edit Note"
             onClose={onCloseModal}
             show={modalState}
-            renderedNote={renderedNote}>
+            renderedNote={renderedNote}
+            onCreateNote={onCreateNote}
+            onUpdateNote={onUpdateNote}>
           </SaveNote>
 
           <DeleteNote
             modalTitle="¿Are you sure to delete this note?"
             onClose={() => setDeleteModalState(false)}
             show={deleteModalState}
-            noteId={renderedNote.id}>
+            noteToDelete={renderedNote}
+            onDeleteNote={onDeleteNote}>
           </DeleteNote></>
       }
     </div>

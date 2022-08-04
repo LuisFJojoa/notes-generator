@@ -4,9 +4,7 @@ import { CSSTransition } from "react-transition-group";
 import { NoteContext } from "../context/NoteContext";
 import "./ModalForm.css";
 
-export const DeleteNote = ({ onClose, show, modalTitle, noteId }) => {
-
-  const { removeNote } = useContext(NoteContext)
+export const DeleteNote = ({ onClose, show, modalTitle, noteToDelete, onDeleteNote }) => {
 
   const closeOnEscapeKeyDown = e => {
     if ((e.charCode || e.keyCode) === 27) {
@@ -14,9 +12,9 @@ export const DeleteNote = ({ onClose, show, modalTitle, noteId }) => {
     }
   };
 
-  const onDeleteNote = () => {
+  const onDelete = () => {
     console.log('Delete note');
-    removeNote(noteId)
+    onDeleteNote(noteToDelete)
   }
 
   useEffect(() => {
@@ -35,11 +33,11 @@ export const DeleteNote = ({ onClose, show, modalTitle, noteId }) => {
       <div className="modal" onClick={onClose} role="dialog">
         <div className="modal-content p-3" onClick={e => e.stopPropagation()}>
           <div className="modal-header d-flex justify-content-center">
-            <h1x className="modal-title">{modalTitle}</h1x>
+            <h1 className="modal-title">{modalTitle}</h1>
           </div>
           <div className="modal-footer d-flex justify-content-center ">
             <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={onClose}>Cancel</button>
-            <button type="button" className="btn btn-danger" onClick={onDeleteNote}>Delete</button>
+            <button type="button" className="btn btn-danger" onClick={onDelete}>Delete</button>
           </div>
         </div>
       </div>

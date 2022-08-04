@@ -1,42 +1,57 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
+import { useAxios } from "../../hooks/useAxios";
 import { useForm } from "../../hooks/useForm";
-import { NoteContext } from "../context/NoteContext";
 import "./ModalForm.css";
 import "./SaveNote.css"
 
-export const SaveNote = ({ onClose, show, renderedNote }) => {
+export const SaveNote = ({ onClose, show, renderedNote, onCreateNote, onUpdateNote }) => {
 
+  const result = useAxios()
   const [initialDataToFrom, setInitialDataToForm] = useState({
+    action: 'edit',
     title: 'Edit note',
     event: 'Save changes'
   })
-
+  
   const [inputCategory, setInputCategory] = useState('');
-  const { editNote } = useContext(NoteContext)
   const { title, content, categories: renderedCategories } = renderedNote
+  const splitResult = renderedCategories?.split(',')
   const [categories, setCategories] = useState([])
+  
+  const [formState, setFormState] = useState({});
+
+  const onInputChange = ({ target }) => {
+    const { name, value } = target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });  
+  };
+
 
   useEffect(() => {
-    setCategories(renderedCategories)
+    setCategories(splitResult || [])
+    setFormState({
+      title,
+      content
+    })
     {
       (title)
         ? setInitialDataToForm({
+          action: 'edit',
           title: 'Edit note',
           event: 'Save changes'
         })
         : setInitialDataToForm({
+          action: 'create',
           title: 'New note',
           event: 'Add note'
         })
     }
   }, [renderedNote])
 
-  const { onInputChange } = useForm({
-    title: title,
-    content: content
-  })
 
   const onCategoryChange = ({ target }) => {
     setInputCategory(target.value);
@@ -66,9 +81,35 @@ export const SaveNote = ({ onClose, show, renderedNote }) => {
   };
 
   const onSaveNote = () => {
-    console.log('Save note');
-    editNote(renderedNote)
+
+    if (initialDataToFrom.action === 'edit') {
+
+      const note = {
+        id: renderedNote.id,
+        title: formState.title,
+        content: formState.content,
+        state: renderedNote.state,
+        categories: categories.join()
+      }
+
+      console.log('Edit note');
+      onUpdateNote(note, false)
+
+    } else {
+      const note = {
+        title: formState.title,
+        content: formState.content,
+        state: 'no-archived',
+        categories: categories.join()
+      }
+      console.log('Create note');
+      onCreateNote(note)
+    }
   }
+
+  useEffect(()=> {
+
+  },[])
 
   useEffect(() => {
     document.body.addEventListener("keydown", closeOnEscapeKeyDown);
@@ -92,11 +133,11 @@ export const SaveNote = ({ onClose, show, renderedNote }) => {
             <form>
               <div className="form-group">
                 <label htmlFor="recipient-name" className="col-form-label"><b>Title:</b></label>
-                <input name="title" type="text" className="form-control" id="recipient-name" value={title || ''} onChange={onInputChange} />
+                <input name="title" type="text" className="form-control" id="recipient-name" value={formState.title} onChange={onInputChange} />
               </div>
               <div className="form-group">
                 <label htmlFor="message-text" className="col-form-label"><b>Content:</b></label>
-                <textarea name="content" rows="7" className="form-control" id="message-text" value={content} onChange={onInputChange}></textarea>
+                <textarea name="content" rows="7" className="form-control" id="message-text" value={formState.content} onChange={onInputChange}></textarea>
               </div>
 
               {/* ADD--CATEGORIES */}

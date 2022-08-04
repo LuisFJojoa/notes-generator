@@ -1,16 +1,13 @@
-import { useContext, useEffect, useState } from "react"
+import { useState } from "react"
 import { NotesList } from "../components/NotesList"
-import { NoteContext } from "../context"
 import { BsPlus } from 'react-icons/bs'
+import { useAxios } from "../../hooks/useAxios"
+import { LoadingScreen } from "../components/LoadingScreen"
 
 export const NotesPage = () => {
 
-  const { changePage, allNotes } = useContext(NoteContext)
   const [modalState, setModalState] = useState(false)
-
-  useEffect(() => {
-    changePage('no-archived')
-  }, [])
+  const { deleteNote, createNote, updateNote, data: renderedNotes, isLoading, hasError } = useAxios('findByState', 'no-archived');
 
   const onAddNote = () => {
     setModalState(true)
@@ -32,7 +29,12 @@ export const NotesPage = () => {
       </div>
 
       <hr />
-      {/* <NotesList modalState={modalState} setModal={setModalState} /> */}
+      {
+        isLoading
+          ? <LoadingScreen />
+          : <NotesList modalState={modalState} setModal={setModalState} renderedNotes={renderedNotes} createNote={createNote} updateNote={updateNote} deleteNote={deleteNote}/>
+      }
+
     </div>
   )
 }

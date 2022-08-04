@@ -1,20 +1,21 @@
-import { useContext, useEffect } from "react"
+import { useAxios } from "../../hooks/useAxios";
+import { LoadingScreen } from "../components/LoadingScreen";
 import { NotesList } from "../components/NotesList"
-import { NoteContext } from "../context"
 
 export const ArchivedNotesPage = () => {
 
-  const {allNotes, changePage} = useContext(NoteContext)
-  
-  useEffect(() => {
-    changePage('archived')
-  }, [])
+  const { deleteNote,updateNote, data: renderedNotes, isLoading, hasError } = useAxios('findByState', 'archived');
+
 
   return (
     <div className="mt-3">
-    <h1>ArchivedNotesPage</h1>
-    <hr />
-    <NotesList/>
+      <h1>ArchivedNotesPage</h1>
+      <hr />
+      {
+        isLoading
+          ? <LoadingScreen />
+          : <NotesList renderedNotes={renderedNotes} onDeleteNote={deleteNote} updateNote={updateNote} />
+      }
     </div>
   )
 }

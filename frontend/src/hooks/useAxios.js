@@ -20,8 +20,6 @@ export const useAxios = (query, param, hasStatusChanged) => {
     const result = await NoteDataService.findByState(param)
     const data = await result.data
 
-    console.log(data);
-
     setState({
       data,
       isLoading: false,
@@ -45,7 +43,7 @@ export const useAxios = (query, param, hasStatusChanged) => {
   }
 
   const createNote = async (param) => {
-
+    console.log(param);
     setState({
       ...state,
       isLoading: true
@@ -92,6 +90,10 @@ export const useAxios = (query, param, hasStatusChanged) => {
   return {
     data: state.data,
     isLoading: state.isLoading,
-    hasError: state.hasError
+    hasError: state.hasError,
+    createNote,
+    deleteNote,
+    updateNote,
+    getNotesByState
   }
 }

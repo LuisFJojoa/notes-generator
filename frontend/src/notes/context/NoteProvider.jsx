@@ -15,11 +15,9 @@ export const NoteProvider = ({ children }) => {
 
   // { id: 1, title: 'Some old note 1', content: 'Information here updated please...', state: 'archived', categories: "['category-1']" }
 
-  const { data, isLoading, hasError } = useAxios('update', { id: 3, title: 'New Data testing 3 because yes...', content: 'Information here updated please por favor...', state: 'no-archived', categories: "['category-1']" }, false);
+  // const { data, isLoading, hasError } = useAxios('update', { id: 3, title: 'New Data testing 3 because yes...', content: 'Information here updated please por favor...', state: 'no-archived', categories: ['category-1','category-2'].join() }, false);
 
-  const response = !!data && data.length > 0 && data[0];
-
-  console.log();
+  // const response = !!data && data.length > 0 && data[0];
 
   const initializer = () => {
   }

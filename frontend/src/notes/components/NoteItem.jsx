@@ -13,18 +13,17 @@ import { NoteContext } from "../context/NoteContext";
 // {
 //   id, superhero, publisher, alter_ego, first_appearance, characters
 // }
-export const NoteItem = ({ id, title, content, lastEdited, state, onCreateEditModal, onDeleteModal}) => {
+export const NoteItem = ({ id, title, content, updatedAt, state, onCreateEditModal, onDeleteModal, onUpdateNote}) => {
 
 
-  const { removeNote, changeNoteState } = useContext(NoteContext)
   
   const onChangeState = () => {
     console.log("State changed: " + id);
-    const payload = {
+    const note = {
       id:id,
       state: (state === 'archived') ? 'no-archived': 'archived'
     }
-    changeNoteState(payload)
+    onUpdateNote(note, true)
   }
 
   const onDeleteNote = () => {
@@ -43,16 +42,16 @@ export const NoteItem = ({ id, title, content, lastEdited, state, onCreateEditMo
       <div className="card">
         <div className="row no-gutters">
           <div className="col-9">
-            <div className="card-body col d-flex justify-content-start">
+            <div className="card-body d-flex justify-content-start">
               <div className="col-2">
 
                 <BsFillFileEarmarkFill size={70} />
               </div>
               <div className="col-10">
 
-                <h3 className="card-title"><b>{title}</b></h3>
+                <h3 className="card-title text-truncate"><b>{title}</b></h3>
                 <p className="card-text text-muted">
-                  <b>Last edited:</b> {lastEdited}
+                  <b>Last edited:</b> {updatedAt}
                 </p>
               </div>
               {/* 

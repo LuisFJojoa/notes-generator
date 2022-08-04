@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     categories: {
-      type: Sequelize.JSON
+      type: Sequelize.STRING
     }
   });
   return Note;
