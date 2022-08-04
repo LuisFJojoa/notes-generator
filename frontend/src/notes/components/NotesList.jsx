@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { SaveNote, DeleteNote, NoteItem } from "./";
+import { SaveNote, DeleteNote, NoteItem, EmptyScreen } from "./";
 
-export const NotesList = ({modalState=false, setModal, renderedNotes, createNote, updateNote, deleteNote}) => {
+export const NotesList = ({ modalState = false, setModal, renderedNotes, createNote, updateNote, deleteNote, title }) => {
 
   const [deleteModalState, setDeleteModalState] = useState(false)
   const [renderedNote, setRenderedNote] = useState({})
-  
+
   const onDeleteModal = (note) => {
     setRenderedNote(note)
     setDeleteModalState(true)
@@ -16,17 +16,17 @@ export const NotesList = ({modalState=false, setModal, renderedNotes, createNote
     setModal(true);
   }
 
-  const onCloseModal= () => {
+  const onCloseModal = () => {
     setModal(false);
     setRenderedNote({});
   }
 
-  const onCreateNote= (note) => {
+  const onCreateNote = (note) => {
     createNote(note)
     setModal(false)
   }
 
-  const onUpdateNote= (note, flag) => {
+  const onUpdateNote = (note, flag) => {
     updateNote(note, flag)
     setModal(false)
   }
@@ -36,37 +36,43 @@ export const NotesList = ({modalState=false, setModal, renderedNotes, createNote
     setDeleteModalState(false)
   }
   return (
-    <div className="row rows-cols-sm-1 row-cols-md-2 g-3">
+    <>
       {
-        renderedNotes?.map((note) => (
-          <NoteItem
-            key={note.id}
-            {...note}
-            onCreateEditModal={() => onCreateEditModal(note)}
-            onDeleteModal={() => onDeleteModal(note)}
-            onUpdateNote={updateNote}
-          />
-        ))
+        (renderedNotes.length === 0) && <EmptyScreen title={title}/>
       }
-      {
-        <>
-          <SaveNote
-            modalTitle="Create/Edit Note"
-            onClose={onCloseModal}
-            show={modalState}
-            renderedNote={renderedNote}
-            onCreateNote={onCreateNote}
-            onUpdateNote={onUpdateNote}>
-          </SaveNote>
+      
+      <div className="row rows-cols-sm-1 row-cols-md-2 g-3">
+        {
+          renderedNotes?.map((note) => (
+            <NoteItem
+              key={note.id}
+              {...note}
+              onCreateEditModal={() => onCreateEditModal(note)}
+              onDeleteModal={() => onDeleteModal(note)}
+              onUpdateNote={updateNote}
+            />
+          ))
+        }
+        {
+          <>
+            <SaveNote
+              modalTitle="Create/Edit Note"
+              onClose={onCloseModal}
+              show={modalState}
+              renderedNote={renderedNote}
+              onCreateNote={onCreateNote}
+              onUpdateNote={onUpdateNote}>
+            </SaveNote>
 
-          <DeleteNote
-            modalTitle="¿Are you sure to delete this note?"
-            onClose={() => setDeleteModalState(false)}
-            show={deleteModalState}
-            noteToDelete={renderedNote}
-            onDeleteNote={onDeleteNote}>
-          </DeleteNote></>
-      }
-    </div>
+            <DeleteNote
+              modalTitle="¿Are you sure to delete this note?"
+              onClose={() => setDeleteModalState(false)}
+              show={deleteModalState}
+              noteToDelete={renderedNote}
+              onDeleteNote={onDeleteNote}>
+            </DeleteNote></>
+        }
+      </div>
+    </>
   )
 }

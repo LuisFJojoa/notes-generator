@@ -131,11 +131,11 @@ export const SaveNote = ({ onClose, show, renderedNote, onCreateNote, onUpdateNo
             <form>
               <div className="form-group">
                 <label htmlFor="recipient-name" className="col-form-label"><b>Title:</b></label>
-                <input name="title" type="text" className="form-control" id="recipient-name" value={formState.title} onChange={onInputChange} />
+                <input name="title" type="text" className="form-control" id="recipient-name" value={formState.title || ''} onChange={onInputChange} />
               </div>
               <div className="form-group">
                 <label htmlFor="message-text" className="col-form-label"><b>Content:</b></label>
-                <textarea name="content" rows="7" className="form-control" id="message-text" value={formState.content} onChange={onInputChange}></textarea>
+                <textarea name="content" rows="7" className="form-control" id="message-text" value={formState.content || ''} onChange={onInputChange}></textarea>
               </div>
 
               {/* ADD--CATEGORIES */}

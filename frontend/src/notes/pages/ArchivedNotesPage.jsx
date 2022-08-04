@@ -12,9 +12,7 @@ export const ArchivedNotesPage = () => {
       {
         isLoading
           ? <LoadingScreen title="Loading archived notes" />
-          : (renderedNotes.length !== 0) 
-            ? <NotesList renderedNotes={renderedNotes} deleteNote={deleteNote} updateNote={updateNote} />
-            : <EmptyScreen title="No archived notes yet..."/>
+          : <NotesList title="No notes archived yet..." renderedNotes={renderedNotes} deleteNote={deleteNote} updateNote={updateNote} />
       }
     </div>
   )

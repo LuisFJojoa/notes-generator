@@ -31,9 +31,8 @@ export const NotesPage = () => {
       {
         isLoading
           ? <LoadingScreen title="Loading notes" />
-          : (renderedNotes.length !== 0)
-            ? <NotesList modalState={modalState} setModal={setModalState} renderedNotes={renderedNotes} createNote={createNote} updateNote={updateNote} deleteNote={deleteNote}/>
-            : <EmptyScreen title="No notes yet, CREATE your first note here..."/>
+          : <NotesList title="No notes yet, CREATE your first note here..." modalState={modalState} setModal={setModalState} renderedNotes={renderedNotes} createNote={createNote} updateNote={updateNote} deleteNote={deleteNote}/>
+             
       }
 
     </div>
