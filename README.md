@@ -29,11 +29,11 @@ _El stack tecnológico utilizado para el BACKEND fue el siguiente:_
 * [XAMPP 8.1.6](https://www.apachefriends.org/es/index.html) - Entorno de desarrollo local
 * [MariaDB 10.4.24](https://mariadb.org/) - Sistema de gestión de base de datos de XAMPP
 
-# Despliegue 🖇️
+# Despliegue 
 
-Para el despliegue de la aplicación se utilizaron _Netlify (Frontend)_  y _Heroku (Backend)_, a continuación se comparte el enlace de despliegue:
+Para el despliegue de la aplicación se utilizaron [_Netlify_](https://www.netlify.com/) y [_Heroku_](https://heroku.com/), a continuación se comparte el enlace de despliegue:
 
-[Notes App](https://fullstack-notes-app.netlify.app)
+### [Fullstack notes app](https://fullstack-notes-app.netlify.app)
 
 ## ¿Quieres probar el proyecto localmente? 
 
