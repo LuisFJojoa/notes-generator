@@ -53,7 +53,8 @@ cd GitHubLuisFJojoa-Ensolvers-challange
 
 Una vez ingreses a la carpeta te encontrarás con el archivo *bash.sh*, este archivo contiene toda la configuración para crear la base de datos a través del gestor Mysql. Además, instalará las dependencias necesarias para el backend y, por último, lo desplegará.  
 
-**Nota:** El parametro *mysql* dentro del archivo *bash.sh* debe ser modificado segun el gestor de base de datos que usted tenga configurado en su máquina.
+**Nota 1:** El parametro *mysql* dentro del archivo *bash.sh* debe ser modificado segun el gestor de base de datos que usted tenga configurado en su máquina.
+**Nota 2:** Una vez ejecute el comando mostrado a después de este enunciado, a través de la consola se le solicitará la contraseña para el usuario **root** de su gestor de base de datos, si usted trabaja con un usuario diferente a este, por favor modifique ese valor en el archivo *bash.sh* solamente donde corresponde.
 
 Basta con ejecutar los siguientes comandos para levantar el backend correctamente
 
@@ -77,6 +78,7 @@ cd backend
 npm install
 npm run start
 ```
+
 ###  Configuración del FRONTEND para cualquier sistema operativo o entorno de trabajo
 
 Una vez confgiurado y desplegado el backend, será necesario abrir otra consola (la anterior tendrá desplegado el log del backend) y ubicarse en la raíz de proyecto con el fin de instalar las dependencias necesarias para el frontend y exponer la aplicación localmente.
