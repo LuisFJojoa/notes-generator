@@ -1,8 +1,7 @@
 import { useState } from "react"
-import { NotesList } from "../components/NotesList"
 import { BsPlus } from 'react-icons/bs'
 import { useAxios } from "../../hooks/useAxios"
-import { LoadingScreen } from "../components/LoadingScreen"
+import { LoadingScreen, EmptyScreen, NotesList } from "../components/"
 
 export const NotesPage = () => {
 
@@ -17,7 +16,7 @@ export const NotesPage = () => {
     <div className="mt-3">
       <div className="container d-flex p-0">
         <div className="col-6">
-          <h1>NotesPage</h1>
+          <h1>My notes</h1>
         </div>
 
         <div className="col-6 d-flex align-items-center justify-content-end">
@@ -31,8 +30,10 @@ export const NotesPage = () => {
       <hr />
       {
         isLoading
-          ? <LoadingScreen />
-          : <NotesList modalState={modalState} setModal={setModalState} renderedNotes={renderedNotes} createNote={createNote} updateNote={updateNote} deleteNote={deleteNote}/>
+          ? <LoadingScreen title="Loading notes" />
+          : (renderedNotes.length !== 0)
+            ? <NotesList modalState={modalState} setModal={setModalState} renderedNotes={renderedNotes} createNote={createNote} updateNote={updateNote} deleteNote={deleteNote}/>
+            : <EmptyScreen title="No notes yet, CREATE your first note here..."/>
       }
 
     </div>

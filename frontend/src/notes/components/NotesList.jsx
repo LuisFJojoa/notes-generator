@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { SaveNote } from "./SaveNote";
-import { DeleteNote } from "./DeleteNote";
-import { NoteItem } from "./NoteItem";
+
+import { SaveNote, DeleteNote, NoteItem } from "./";
 
 export const NotesList = ({modalState=false, setModal, renderedNotes, createNote, updateNote, deleteNote}) => {
 
@@ -34,9 +33,8 @@ export const NotesList = ({modalState=false, setModal, renderedNotes, createNote
 
   const onDeleteNote = (note) => {
     deleteNote(note)
-    setModal(false)
+    setDeleteModalState(false)
   }
-  // console.log(result);
   return (
     <div className="row rows-cols-sm-1 row-cols-md-2 g-3">
       {

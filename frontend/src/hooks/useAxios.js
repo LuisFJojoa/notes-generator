@@ -43,7 +43,6 @@ export const useAxios = (query, param, hasStatusChanged) => {
   }
 
   const createNote = async (param) => {
-    console.log(param);
     setState({
       ...state,
       isLoading: true

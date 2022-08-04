@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
+
 import { useAxios } from "../../hooks/useAxios";
-import { useForm } from "../../hooks/useForm";
 import "./ModalForm.css";
 import "./SaveNote.css"
 
@@ -91,11 +92,7 @@ export const SaveNote = ({ onClose, show, renderedNote, onCreateNote, onUpdateNo
         state: renderedNote.state,
         categories: categories.join()
       }
-
-      console.log('Edit note');
-
-      console.log(note);
-      //onUpdateNote(note, false)
+      onUpdateNote(note, false)
 
     } else {
       const note = {
@@ -104,7 +101,6 @@ export const SaveNote = ({ onClose, show, renderedNote, onCreateNote, onUpdateNo
         state: 'no-archived',
         categories: categories.join()
       }
-      console.log('Create note');
       onCreateNote(note)
     }
   }

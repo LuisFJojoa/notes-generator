@@ -1,24 +1,13 @@
-import { useCallback, useContext } from "react";
-import { Link } from "react-router-dom"
-
 import { IconContext } from "react-icons";
 import { BsFillArchiveFill, BsUpload, BsTrashFill, BsPencilFill, BsFillFileEarmarkFill } from 'react-icons/bs'
 
-import { NoteContext } from "../context/NoteContext";
+import { getHoursToCreated } from '../helpers/convertDateToHours'
 
-// const CharacterByHero = ({ alter_ego, characters}) => {
-//   if (alter_ego === characters) return (<></>)
-//   return (<p>{characters}</p>)
-// }
-// {
-//   id, superhero, publisher, alter_ego, first_appearance, characters
-// }
-export const NoteItem = ({ id, title, content, updatedAt, state, onCreateEditModal, onDeleteModal, onUpdateNote}) => {
+export const NoteItem = ({ id, title, updatedAt, state, onCreateEditModal, onDeleteModal, onUpdateNote}) => {
 
 
   
   const onChangeState = () => {
-    console.log("State changed: " + id);
     const note = {
       id:id,
       state: (state === 'archived') ? 'no-archived': 'archived'
@@ -43,15 +32,15 @@ export const NoteItem = ({ id, title, content, updatedAt, state, onCreateEditMod
         <div className="row no-gutters">
           <div className="col-9">
             <div className="card-body d-flex justify-content-start">
-              <div className="col-2">
+              <div className="col-2 d-flex align-items-center">
 
-                <BsFillFileEarmarkFill size={70} />
+                <BsFillFileEarmarkFill size={60} />
               </div>
               <div className="col-10">
 
                 <h3 className="card-title text-truncate"><b>{title}</b></h3>
                 <p className="card-text text-muted">
-                  <b>Last edited:</b> {updatedAt}
+                  <b>Last edited:</b> {getHoursToCreated(updatedAt)}
                 </p>
               </div>
               {/* 

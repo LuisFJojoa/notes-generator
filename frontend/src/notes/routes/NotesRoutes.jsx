@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import { Navbar } from "../../ui/components/"
-import { NoteProvider } from "../context/NoteProvider"
 import { NotesPage, ArchivedNotesPage, NotFoundPage } from "../pages"
 
 export const NotesRoutes = () => {
@@ -8,7 +7,6 @@ export const NotesRoutes = () => {
     <>
       <Navbar />
       <div className="container">
-        <NoteProvider>
           <Routes>
             <Route path="/" element={<Navigate to="/my-notes" />} />
             <Route path="my-notes" element={<NotesPage />} />
@@ -16,9 +14,7 @@ export const NotesRoutes = () => {
             <Route path="*" element={<NotFoundPage />} />
             {/* <Route path="search" element={<SearchPage/>} />
           <Route path="hero/:id" element={<HeroPage />} /> */}
-
           </Routes>
-        </NoteProvider>
       </div>
     </>
   )

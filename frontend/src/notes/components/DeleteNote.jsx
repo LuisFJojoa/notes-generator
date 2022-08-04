@@ -1,7 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+
 import ReactDOM from "react-dom";
+import { BsTrashFill } from "react-icons/bs";
 import { CSSTransition } from "react-transition-group";
-import { NoteContext } from "../context/NoteContext";
+
 import "./ModalForm.css";
 
 export const DeleteNote = ({ onClose, show, modalTitle, noteToDelete, onDeleteNote }) => {
@@ -13,7 +15,6 @@ export const DeleteNote = ({ onClose, show, modalTitle, noteToDelete, onDeleteNo
   };
 
   const onDelete = () => {
-    console.log('Delete note');
     onDeleteNote(noteToDelete)
   }
 
@@ -33,11 +34,11 @@ export const DeleteNote = ({ onClose, show, modalTitle, noteToDelete, onDeleteNo
       <div className="modal" onClick={onClose} role="dialog">
         <div className="modal-content p-3" onClick={e => e.stopPropagation()}>
           <div className="modal-header d-flex justify-content-center">
-            <h1 className="modal-title">{modalTitle}</h1>
+            <h3 className="modal-title">{modalTitle}</h3>
           </div>
           <div className="modal-footer d-flex justify-content-center ">
             <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={onClose}>Cancel</button>
-            <button type="button" className="btn btn-danger" onClick={onDelete}>Delete</button>
+            <button type="button" className="btn btn-danger d-flex justify-content-around align-items-center" onClick={onDelete}>Delete <BsTrashFill /></button>
           </div>
         </div>
       </div>
