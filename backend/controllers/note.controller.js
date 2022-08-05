@@ -1,5 +1,6 @@
 const db = require("../models");
 const Note = db.note;
+const Category = db.category;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Note
@@ -103,7 +104,18 @@ exports.delete = (req, res) => {
 exports.findAllNotesByState = (req, res) => {
   console.log(req);
   const state = req.query.state;
-  Note.findAll({ where: { state: state }})
+  Note.findAll({
+    where: { state: state }, include: [
+      {
+        model: Category,
+        as: "categoryes",
+        attributes: ["id", "name"],
+        through: {
+          attributes: [],
+        }
+      },
+    ]
+  })
     .then(data => {
       res.send(data);
     })

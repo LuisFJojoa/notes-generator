@@ -1,18 +1,20 @@
-module.exports = app => {
-  const notes = require("../controllers/note.controller.js");
-  var router = require("express").Router();
+// Importing the module
+const express = require("express")
+// Creating express Router
+const router = express.Router();
 
-  // Create a new Note
-  router.post("/", notes.create);
+const notes = require("../controllers/note.controller.js");
 
-  // Retrieve all notes by state
-  router.get("/", notes.findAllNotesByState);
- 
-  // Update a Tutorial with id
-  router.put("/:id", notes.update);
+// Create a new Note
+router.post("/", notes.create);
 
-  // Delete a Tutorial with id
-  router.delete("/:id", notes.delete);
-  
-  app.use('/api/notes', router);
-};
+// Retrieve all notes by state
+router.get("/", notes.findAllNotesByState);
+
+// Update a Tutorial with id
+router.put("/:id", notes.update);
+
+// Delete a Tutorial with id
+router.delete("/:id", notes.delete);
+
+module.exports = router

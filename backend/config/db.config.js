@@ -3,7 +3,7 @@ module.exports = {
   HOST: "localhost",
   USER: "root", //ensolvers_db
   PASSWORD: "",
-  DB: "ensolvers_notes",
+  DB: "ensolvers_notes", //ensolvers_db
   dialect: "mysql",
   //pool is optional, it will be used for Sequelize connection pool configuration
   pool: {

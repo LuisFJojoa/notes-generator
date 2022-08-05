@@ -2,58 +2,75 @@ const db = require("../models");
 const Note = db.note;
 const Category = db.category;
 
-exports.create = (category) => {
+exports.create = (req, res) => {
+
+  const category = req.body;
+
+  console.log(category);
   return Category.create({
     name: category.name,
   })
     .then((category) => {
       console.log(">> Created Category: " + JSON.stringify(category, null, 2));
-      return category;
+      res.send(category);
     })
     .catch((err) => {
       console.log(">> Error while creating Category: ", err);
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Category."
+      });
     });
 };
 
-exports.findAll = () => {
-  return Category.findAll({
+exports.addNote = (req, res) => {
+  const {categoryId, noteId} = req.body
+  Category.findByPk(categoryId)
+    .then((category) => {
+      if (!category) {
+        console.log("Category not found!");
+        return null;
+      }
+      return Note.findByPk(noteId).then((note) => {
+        if (!note) {
+          console.log("Category not found!");
+          return null;
+        }
+        category.addNote(note);
+        console.log(`>> added Note id=${note.id} to Category id=${category.id}`);
+        res.send(category);
+      });
+    })
+    .catch((err) => {
+      console.log(">> Error while adding Note to Category: ", err);
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while adding note to Category."
+      });
+    });
+};
+
+exports.findById = (req, res) => {
+  Category.findByPk(req.query.id, {
     include: [
       {
         model: Note,
         as: "notes",
-        attributes: ["id", "title", "content", "categories"],
+        attributes: ["id", "title", "content", "state", "categories"],
         through: {
           attributes: [],
         }
       },
     ],
   })
-    .then((categories) => {
-      return categories;
-    })
-    .catch((err) => {
-      console.log(">> Error while retrieving Tags: ", err);
-    });
-};
-
-exports.addTutorial = (categoryId, noteId) => {
-  return Category.findByPk(categoryId)
     .then((category) => {
-      if (!category) {
-        console.log("Tag not found!");
-        return null;
-      }
-      return Note.findByPk(noteId).then((note) => {
-        if (!note) {
-          console.log("Note not found!");
-          return null;
-        }
-        category.addTutorial(note);
-        console.log(`>> added Note id=${note.id} to Tag id=${category.id}`);
-        return category;
-      });
+      res.send(category);
     })
     .catch((err) => {
-      console.log(">> Error while adding Note to Tag: ", err);
+      console.log(">> Error while finding Category: ", err);
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while finding Category."
+      });
     });
 };

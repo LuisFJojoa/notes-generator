@@ -31,7 +31,12 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to noteApp backend full rest API application." });
 });
 
-require("./routes/note.routes")(app);
+const notesRoutes = require("./routes/note.routes.js")
+const categoriesRoutes = require("./routes/category.routes")
+
+app.use("/api/notes", notesRoutes)
+app.use("/api/categories", categoriesRoutes)
+
 // set port, listen for requests
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
