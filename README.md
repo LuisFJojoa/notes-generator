@@ -33,6 +33,8 @@ _El stack tecnológico utilizado para el BACKEND fue el siguiente:_
 
 Para el despliegue de la aplicación se utilizaron [_Netlify_](https://www.netlify.com/) y [_Heroku_](https://heroku.com/), a continuación se comparte el enlace de despliegue:
 
+**Nota:** El login no está conectado con ningún método de autenticación, basta con dar clic en login para ingresar.
+
 ### [Fullstack notes app](https://fullstack-notes-app.netlify.app)
 
 ## ¿Quieres probar el proyecto localmente? 

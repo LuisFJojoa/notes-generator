@@ -24,7 +24,7 @@ exports.create = (req, res) => {
 };
 
 exports.addNote = (req, res) => {
-  const {categoryId, noteId} = req.body
+  const { categoryId, noteId } = req.body
   Category.findByPk(categoryId)
     .then((category) => {
       if (!category) {
@@ -71,6 +71,36 @@ exports.findById = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while finding Category."
+      });
+    });
+};
+
+exports.findAll = (req, res) => {
+  const state = req.query.state
+  console.log(req);
+  return Category.findAll({
+    include: [
+      {
+        model: Note,
+        as: "notes",
+        where : {state: state},
+        attributes: ["id", "title", "content", "state", "categories"],
+        through: {
+          attributes: [],
+        },
+        
+      },
+    ],
+  })
+    .then((categories) => {
+      console.log(categories);
+      res.send(categories);
+    })
+    .catch((err) => {
+      console.log(">> Error while retrieving Categories: ", err);
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Categories."
       });
     });
 };
