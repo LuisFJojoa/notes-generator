@@ -29,7 +29,7 @@ export const NotesPage = () => {
       <hr />
       {
         isLoading
-          ? <LoadingScreen title="Loading notes" />
+          ? <LoadingScreen title="Loading notes... wait a minute" />
           : <NotesList title={`No notes yet, ADD your first note here...`} modalState={modalState} setModal={setModalState} renderedNotes={renderedNotes} createNote={createNote} updateNote={updateNote} deleteNote={deleteNote}/>
              
       }

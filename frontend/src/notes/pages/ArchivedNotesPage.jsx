@@ -15,7 +15,7 @@ export const ArchivedNotesPage = () => {
       <hr />
       {
         isLoading
-          ? <LoadingScreen title="Loading archived notes" />
+          ? <LoadingScreen title="Loading archived notes... wait a minute" />
           : <NotesList title="No notes archived yet..." renderedNotes={renderedNotes} deleteNote={deleteNote} updateNote={updateNote} />
       }
     </div>
